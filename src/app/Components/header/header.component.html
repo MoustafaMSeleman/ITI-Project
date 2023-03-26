@@ -1,28 +1,28 @@
-<div class="container-fluid bg-primary">
-  <!-- 
-    - a standard nav bar is created with .navbar class 
+<!-- <div class="container-fluid bg-primary">
+
+    - a standard nav bar is created with .navbar class
     - followed by a responsive collapsing class .navbar-expand-sm|md|lg|xl|xxl
        "stacks the navbar verticall on small|medium|large|xlarge|xxlarge screens"
-    - to add links inside navbar, use ul or div with class .navbar-nav 
-        then add li with class .nav-item 
-        followed by a element with class .nav-link 
-    - to make vertical navbar 
-       remove .navbar-expand- 
-    - centered navbar:- add .justify-content-center class 
+    - to add links inside navbar, use ul or div with class .navbar-nav
+        then add li with class .nav-item
+        followed by a element with class .nav-link
+    - to make vertical navbar
+       remove .navbar-expand-
+    - centered navbar:- add .justify-content-center class
     - use .bg-color to change the background color of the navbar
       .bg-primary .bg-success .bg-info .bg-danger .bg-dark
     - use .navbar-dark to add white text
-      or .navbar-light to black text 
+      or .navbar-light to black text
     - .navbar-brand class is used to highlight the brand/logo name
     - to create a collapsible navbar
-       use a button with .navbar-toggler 
+       use a button with .navbar-toggler
                         data-bs-toggle="collapse"
                         data-bs-target="#thetarget"
 
-        then wrap the navbar content insdie a div .collapse .navbar-collapse 
+        then wrap the navbar content insdie a div .collapse .navbar-collapse
 
         followed by an id that matches the data-bs-target of the button
-                    -->
+
   <nav class="navbar navbar-dark">
     <a href="#" class="navbar-brand">BRAND NAME</a>
 
@@ -52,26 +52,58 @@
     </div>
     <!-- In this example, the navbar is hidden on small screens and replaced by a btn
     in the top right corner "try to resize the window" You can always hide it by
-    removing .navbar-expand-md class -->
+    removing .navbar-expand-md class
   </nav>
-</div>
+</div> -->
 <div class="container-fluid bg-dark">
-  <nav class="navbar navbar-expand-md navbar-dark">
+  <nav class="navbar navbar-expand-sm navbar-dark dropdown">
     <a href="#" class="navbar-brand">BRAND NAME</a>
-    <ul class="navbar-nav">
-      <li class="navbar-item">
-        <a href="#" class="nav-link">HOME</a>
-      </li>
-      <li class="navbar-item">
-        <a href="#" class="nav-link">ABOUT</a>
-      </li>
-      <li class="navbar-item">
-        <a href="#" class="nav-link">PORTFOLIO</a>
-      </li>
-      <li class="navbar-item">
-        <a href="#" class="nav-link">CONTACT</a>
-      </li>
-    </ul>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapNavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="navbar-item">
+          <a href="#" class="nav-link">HOME</a>
+        </li>
+        <li class="navbar-item">
+          <a href="#" class="nav-link">ABOUT</a>
+        </li>
+        <li class="navbar-item">
+          <a href="#" class="nav-link">PORTFOLIO</a>
+        </li>
+        <li class="navbar-item dropdown">
+          <a
+            href="#"
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            >CONTACT</a
+          >
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Link</a></li>
+            <li><a class="dropdown-item" href="#">Another link</a></li>
+            <li><a class="dropdown-item" href="#">A third link</a></li>
+          </ul>
+        </li>
+        <!-- Dropdown menu is a toggleable menu that allows the user to choose one value from list:-
+         the .dropdown class indicates a dropdown menu
+       to open the dropdown menu use a btn or link with a class .dropdown-toggle
+       and data-bs-toggle="dropdown"
+       add .dropdown-menu to a div that includes the list
+and .dropdown-item to the list items -->
+        <form class="d-flex">
+          <input class="form-control me-2" type="text" placeholder="Search" />
+          <button class="btn btn-primary" type="button">Search</button>
+          <!-- <span class="glyphicon glyphicon-search"></span> -->
+        </form>
+      </ul>
+    </div>
 
     <!-- In this example, the navbar is hidden on small screens and replaced by a btn
         in the top right corner "try to resize the window" You can always hide it by
