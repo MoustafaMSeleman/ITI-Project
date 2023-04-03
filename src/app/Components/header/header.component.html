@@ -1,105 +1,128 @@
-<div class="container-fluid bg-primary">
-  <!-- 
-    - a standard nav bar is created with .navbar class 
-    - followed by a responsive collapsing class .navbar-expand-sm|md|lg|xl|xxl
-       "stacks the navbar verticall on small|medium|large|xlarge|xxlarge screens"
-    - to add links inside navbar, use ul or div with class .navbar-nav 
-        then add li with class .nav-item 
-        followed by a element with class .nav-link 
-    - to make vertical navbar 
-       remove .navbar-expand- 
-    - centered navbar:- add .justify-content-center class 
-    - use .bg-color to change the background color of the navbar
-      .bg-primary .bg-success .bg-info .bg-danger .bg-dark
-    - use .navbar-dark to add white text
-      or .navbar-light to black text 
-    - .navbar-brand class is used to highlight the brand/logo name
-    - to create a collapsible navbar
-       use a button with .navbar-toggler 
-                        data-bs-toggle="collapse"
-                        data-bs-target="#thetarget"
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span
+    ><img
+      src="src/assets/asu-eng-high-resolution-logo-black-on-transparent-background.png"
+      alt="logo"
+      width="500"
+      height="500"
+  /></span>
 
-        then wrap the navbar content insdie a div .collapse .navbar-collapse 
+  <span class="toolbar-item-spacer"></span>
+  <div class="search pt-1" *ngIf="show">
+    <mat-form-field class="example-form-field">
+      <mat-label>Search</mat-label>
+      <input matInput type="search" [(ngModel)]="value" />
+      <button
+        *ngIf="value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="value = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <button mat-icon-button matTooltip="Search" (click)="showSearchBox()">
+    <mat-icon>search</mat-icon>
+  </button>
 
-        followed by an id that matches the data-bs-target of the button
-                    -->
-  <!-- <nav class="navbar navbar-dark">
-    <a href="#" class="navbar-brand">BRAND NAME</a>
+  <button mat-icon-button matTooltip="Notifications">
+    <span matBadge="4" matBadgeOverlap="false" matBadgeColor="warn">
+      <mat-icon>notifications</mat-icon>
+    </span>
+  </button>
+  <button
+    mat-icon-button
+    matTooltip="My Account"
+    [matMenuTriggerFor]="userAccountMenu"
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#collapNavbar"
-    >
-      <span class="navbar-toggler-icon"></span>
+  <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+    <button mat-menu-item routerLink="#">
+      <mat-icon>person</mat-icon><span>My Account</span>
     </button>
-    <div class="collapse navbar-collapse" id="collapNavbar">
-      <ul class="navbar-nav">
-        <li class="navbar-item">
-          <a href="#" class="nav-link">HOME</a>
-        </li>
-        <li class="navbar-item">
-          <a href="#" class="nav-link">ABOUT</a>
-        </li>
-        <li class="navbar-item">
-          <a href="#" class="nav-link">PORTFOLIO</a>
-        </li>
-        <li class="navbar-item">
-          <a href="#" class="nav-link">CONTACT</a>
-        </li>
-      </ul>
-    </div>
-    <!-- In this example, the navbar is hidden on small screens and replaced by a btn
-    in the top right corner "try to resize the window" You can always hide it by
-    removing .navbar-expand-md class 
-  </nav> -->
-</div>
-<div class="container-fluid flex-container bg-dark">
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">BRAND NAME</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#collapNavbar"
-    >
-      <span class="navbar-toggler-icon"></span>
+    <button mat-menu-item routerLink="#">
+      <mat-icon>settings</mat-icon><span>Settings</span>
     </button>
-    <div class="collapse navbar-collapse" id="collapNavbar">
-      <ul class="navbar-nav">
-        <li class="navbar-item">
-          <a href="#" class="nav-link">HOME</a>
-        </li>
-        <li class="navbar-item">
-          <a href="#" class="nav-link">ABOUT</a>
-        </li>
-        <li class="navbar-item">
-          <a href="#" class="nav-link">PORTFOLIO</a>
-        </li>
-        <li class="navbar-item dropdown">
-          <a
-            href="#"
-            class="nav-link dropdown-toggle"
-            role="button"
-            data-bs-toggle="dropdown"
-            >CONTACT</a
-          >
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">FACEBOOK</a></li>
-            <li><a class="dropdown-item" href="#">Twitter</a></li>
-            <li><a class="dropdown-item" href="#">INSTAGRAM</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input type="text" class="form-control me-2" placeholder="Search" />
-        <button class="btn btn-primary" type="button">Search</button>
-      </form>
-    </div>
+    <button mat-menu-item routerLink="#">
+      <mat-icon>help</mat-icon><span>Help</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item routerLink="#">
+      <mat-icon>exit_to_app</mat-icon>Logout
+    </button>
+  </mat-menu>
+</mat-toolbar>
 
-    <!-- In this example, the navbar is hidden on small screens and replaced by a btn
-        in the top right corner "try to resize the window" You can always hide it by
-        removing .navbar-expand-md class -->
-  </nav>
-</div>
+<mat-sidenav-container class="app-container">
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    [class.mat-elevation-z4]="true"
+    class="app-sidenav"
+  >
+    <mat-nav-list>
+      <mat-list-item routerLink="dashboard">
+        <mat-icon>dashboard</mat-icon><span>Dashboard</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon>account_balance</mat-icon><span>Staff Affairs</span>
+      </mat-list-item>
+      <mat-expansion-panel [class.mat-elevation-z0]="true">
+        <mat-expansion-panel-header>
+          <span>Employees Affairs</span>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="#">
+            <mat-icon>calendar_today</mat-icon><span>Attendance</span>
+          </a>
+          <a mat-list-item routerLink="#">
+            <mat-icon>beach_access</mat-icon><span>Vacations</span>
+          </a>
+          <a mat-list-item routerLink="#">
+            <mat-icon>android</mat-icon><span>Permissions</span>
+          </a>
+          <a mat-list-item routerLink="#">
+            <mat-icon>android</mat-icon><span>Missions</span>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel [class.mat-elevation-z0]="true">
+        <mat-expansion-panel-header>
+          Students Affairs
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="#">
+            <mat-icon>calendar_today</mat-icon><span>Studies</span>
+          </a>
+          <a mat-list-item routerLink="#">
+            <mat-icon>beach_access</mat-icon><span>Postgraduates Team</span>
+          </a>
+          <a mat-list-item routerLink="#">
+            <mat-icon>android</mat-icon><span>Undergraduates Team</span>
+          </a>
+          <a mat-list-item routerLink="#">
+            <mat-icon>android</mat-icon><span>Chep Team</span>
+          </a>
+          <a mat-list-item routerLink="#">
+            <mat-icon>android</mat-icon><span>Fees</span>
+          </a>
+          <a mat-list-item routerLink="#">
+            <mat-icon>android</mat-icon><span>Graduates</span>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="contentD">
+    <router-outlet>
+      <!-- <div class="app-sidenav-content">Components open here</div> -->
+    </router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

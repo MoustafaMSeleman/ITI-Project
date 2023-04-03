@@ -1,0 +1,5 @@
+.flex-conatiner {
+  display: flex;
+  justify-content: space-around;
+  margin: none;
+}
